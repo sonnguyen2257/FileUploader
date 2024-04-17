@@ -28,7 +28,7 @@ app.get('/', (req, res) => {
         // create html file to list all the files with href
         let html = "<h1>Files</h1>";
 
-        if (files.length !== 0) {
+        if (Array.isArray(files)) {
             files.forEach((file) => {
                 app.get(`/${file}`, (req, res) => {
                     res.sendFile(`${__dirname}/View/${file}`);
