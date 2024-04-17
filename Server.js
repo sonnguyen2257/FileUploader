@@ -44,7 +44,7 @@ app.get('/', (req, res) => {
             res.send(html);
 
         } else {
-            res.redirect('/upload');
+            res.send('No files found');
         };
     });
 });
