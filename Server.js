@@ -26,9 +26,10 @@ app.post('/upload', /*upload.single('file'),*/(req, res) => {
 app.get('/', (req, res) => {
     fs.readdir(path.join(__dirname, './Views'), (err, files) => {
         // create html file to list all the files with href
-        let html = "<h1>Files</h1>";
+        
 
         if (Array.isArray(files)) {
+            let html = "<h1>Files</h1>";
             files.forEach((file) => {
                 app.get(`/${file}`, (req, res) => {
                     res.sendFile(`${__dirname}/View/${file}`);
@@ -42,6 +43,8 @@ app.get('/', (req, res) => {
 
             res.send(html);
 
+        } else {
+            res.redirect('/upload');
         };
     });
 });
