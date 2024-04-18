@@ -39,10 +39,10 @@ app.get('/', (req, res) => {
             });
 
             html+=`<form action="/upload" method="post" enctype="multipart/form-data">`;
-            html+=`<input type="file" name="file">`;
+            html+=`<input type="file" name="file" multiple>`;
             html+=`<input type="submit" value="Upload">`;
             html+=`</form>`;
-            
+
             console.log(files);
 
 
