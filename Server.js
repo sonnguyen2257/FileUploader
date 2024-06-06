@@ -15,7 +15,7 @@ app.use((req, res, next) => {
 })
 
 app.get('/', (req, res) => {
-    res.sendFile(path.join(__dirname, 'views/upload.html'));
+    res.sendFile(path.join(__dirname, 'Views/upload.html'));
 });
 
 app.post('/upload', upload.single('newFile'), (req, res) => {
