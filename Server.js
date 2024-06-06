@@ -6,53 +6,28 @@ const app = express();
 const port = 8000;
 
 
-const upload = require('./fileUploader');
+const upload = require('./middleware/fileUploader');
 
-app.use(express.static(path.join(__dirname, './Views')));
+app.use(express.static('public'));
+app.use((req, res, next) => {
+    console.log(`${req.method} request for ${req.url}`);
+    next();
+})
 
-app.post('/upload', upload.single('file'), (req, res) => {
+app.get('/', (req, res) => {
+    res.sendFile(path.join(__dirname, 'views/upload.html'));
+});
+
+app.post('/upload', upload.single('newFile'), (req, res) => {
     console.log(req.file);
     res.send('File uploaded');
 });
 
-app.get('/upload', (req, res) => {
-    res.sendFile(path.join(__dirname, './upload.html'));
+app.delete('/upload', (req, res) => {
+    console.log(req);
+    res.end('Delete request received');
 });
 
-app.post('/upload', /*upload.single('file'),*/(req, res) => {
-    res.redirect('/');
-});
-
-app.get('/', (req, res) => {
-    fs.readdir(path.join(__dirname, './Views'), (err, files) => {
-        // create html file to list all the files with href
-        
-
-        if (Array.isArray(files)) {
-            let html = "<h1>Files</h1>";
-            files.forEach((file) => {
-                app.get(`/${file}`, (req, res) => {
-                    res.sendFile(`${__dirname}/View/${file}`);
-                });
-
-                html += `<a href="/${file}">${file}</a><br>`;
-            });
-
-            html+=`<form action="/upload" method="post" enctype="multipart/form-data">`;
-            html+=`<input type="file" name="file" multiple>`;
-            html+=`<input type="submit" value="Upload">`;
-            html+=`</form>`;
-
-            console.log(files);
-
-
-            res.send(html);
-
-        } else {
-            res.send('No files found');
-        };
-    });
-});
 app.listen(port, () => {
     console.log(`Server is running on port ${port}`);
 });
