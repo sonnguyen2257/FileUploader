@@ -7,3 +7,12 @@ const pond = FilePond.create(inputElement);
 pond.setOptions({
     server: "/upload"
 });
+
+// when a file uploades successfully insert a div with fetch response into the DOM
+pond.on('processfile', (error, file) => {
+    if (!error) {
+        const div = document.createElement('div');
+        div.textContent = file.filename;
+        document.body.appendChild(div);
+    }
+});
