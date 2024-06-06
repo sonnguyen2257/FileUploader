@@ -1,16 +1,30 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://unpkg.com/filepond@^4/dist/filepond.css" rel="stylesheet" />
+    <link rel="stylesheet" href="css/style.css">
     <title>Document</title>
 </head>
+
 <body>
-    <form>
-        <input type="file" id="newFile" name="newFile" id="file" multiple>
-    </form>
+    <h1>Files</h1>
+    <div id="toggleHeader">See more</div>
+    <div id="fileContainer" class="header hidden">
+        <form>
+            <input type="file" id="newFile" name="newFile" id="file" multiple>
+        </form>
+        <div id="fileList">
+        </div>
+    </div>
+    
+    
+    <iframe id="displayBox" class="hidden" src="" width="100%" height="100%"></iframe>
+    
     <script src="https://unpkg.com/filepond@^4/dist/filepond.js"></script>
     <script src="js/fileUploader.js"></script>
 </body>
+
 </html>

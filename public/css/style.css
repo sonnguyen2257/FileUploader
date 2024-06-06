@@ -1,0 +1,16 @@
+body {
+    height: 100vh;
+    margin: 0;
+    padding: 0;
+}
+
+.hidden {
+    display: none;
+}
+
+#displayBox {
+    /* fit content to iframe */
+    width: 80vw;
+    height: 50vh;
+    object-fit: contain;
+}

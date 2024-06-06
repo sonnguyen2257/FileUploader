@@ -23,11 +23,15 @@ app.post('/upload', upload.single('newFile'), (req, res) => {
     res.send('File uploaded');
 });
 
-app.delete('/upload', (req, res) => {
-    console.log(req);
-    res.end('Delete request received');
+app.get('/fileList', (req, res) => {
+    fs.readdir(path.join(__dirname, 'public/Upload'), (err, files) => {
+        if (err) {
+            console.log(err);
+            res.status(500).send('Internal Server Error');
+        }
+        res.json(files);
+    });
 });
-
 app.listen(port, () => {
     console.log(`Server is running on port ${port}`);
 });
